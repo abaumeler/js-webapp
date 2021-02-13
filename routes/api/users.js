@@ -4,6 +4,19 @@ var passport = require('passport');
 var User = mongoose.model('User');
 var auth = require('../auth');
 
+
+router.post('/users', function(req, res, next){
+  var user = new User();
+
+  user.username = req.body.user.username;
+  user.email = req.body.user.email;
+  user.setPassword(req.body.user.password);
+
+  user.save().then(function(){
+    return res.json({user: user.toAuthJSON()});
+  }).catch(next);
+});
+
 router.post('/users/login', function(req, res, next){
     if(!req.body.user.email){
       return res.status(422).json({errors: {email: "can't be blank"}});
