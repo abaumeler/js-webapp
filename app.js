@@ -38,11 +38,8 @@ if(isProduction){
   mongoose.set('debug', true);
 }
 
-<<<<<<< HEAD
-require('./models/Users')
-=======
 require('./models/User');
->>>>>>> c69d87408f963170d2529580dea136832ed7679a
+require('./models/User');
 
 app.use(require('./routes'));
 
